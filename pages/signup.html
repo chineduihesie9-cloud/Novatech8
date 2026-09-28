@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sign Up | NovaTech</title>
+
+<link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+
+<main class="auth-page">
+
+    <div class="auth-container">
+
+        <!-- Logo / Brand -->
+
+        <div class="auth-brand">
+            <a href="../index.html">NovaTech</a>
+            <p>Create your NovaTech account</p>
+        </div>
+
+
+        <!-- Sign Up Card -->
+
+        <div class="auth-card">
+
+            <h1>Create Account</h1>
+
+            <p class="auth-subtitle">
+                Sign up to continue shopping with NovaTech.
+            </p>
+
+
+            <form id="signupForm">
+
+                <div id="authMessage" role="status" aria-live="polite"></div>
+
+                <!-- Full Name -->
+
+                <div class="form-group">
+
+                    <label for="signupName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="signupName"
+                        name="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="form-group">
+
+                    <label for="signupEmail">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="signupEmail"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Password -->
+
+                <div class="form-group">
+
+                    <label for="signupPassword">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="signupPassword"
+                        name="password"
+                        placeholder="Create a password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Confirm Password -->
+
+                <div class="form-group">
+
+                    <label for="signupConfirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="signupConfirmPassword"
+                        name="confirmPassword"
+                        placeholder="Confirm your password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Create Account -->
+
+                <button
+                    type="submit"
+                    class="auth-submit"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <!-- Login Link -->
+
+            <p class="auth-switch">
+
+                Already have an account?
+
+                <a href="../login.html">
+                    Login
+                </a>
+
+            </p>
+
+        </div>
+
+
+        <!-- Back Home -->
+
+        <a
+            href="../index.html"
+            class="back-home"
+        >
+            ← Back to NovaTech
+        </a>
+
+    </div>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase.js"></script>
+<script src="../script.js"></script>
+
+</body>
+</html>

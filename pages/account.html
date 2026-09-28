@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard | NovaTech</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            background: linear-gradient(180deg, #f8fafc 0%, #eef4ff 100%);
+            color: #0f172a;
+            font-family: "Inter", "Segoe UI", sans-serif;
+        }
+
+        .dashboard-shell {
+            max-width: 1320px;
+            margin: 30px auto 80px;
+            padding: 0 20px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            background: linear-gradient(135deg, #0f172a 0%, #111827 32%, #1f2937 100%);
+            color: #fff;
+            padding: 26px 28px;
+            border-radius: 24px;
+            box-shadow: 0 22px 48px rgba(15, 23, 42, 0.18);
+            margin-bottom: 28px;
+        }
+
+        .dashboard-header h1 {
+            margin: 0;
+            font-size: clamp(28px, 3vw, 42px);
+        }
+
+        .dashboard-header p {
+            margin: 6px 0 0;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .dashboard-badge {
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            font-size: 11px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 24px;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .side-panel,
+        .content-panel {
+            background: rgba(255,255,255,0.86);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 22px;
+            box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+            padding: 20px;
+        }
+
+        .profile-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 14px;
+        }
+
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #dbeafe 0%, #e2e8f0 100%);
+            color: #0f172a;
+        }
+
+        .profile-meta h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .profile-meta p {
+            margin: 4px 0 0;
+            color: #64748b;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .nav-links button,
+        .action-btn,
+        .link-btn {
+            border: 1px solid #dfe7f1;
+            background: #fff;
+            border-radius: 12px;
+            padding: 11px 12px;
+            text-align: left;
+            color: #0f172a;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links button:hover,
+        .action-btn:hover,
+        .link-btn:hover {
+            background: #f8fafc;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.05);
+        }
+
+        .nav-links button.active {
+            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+            color: #fff;
+            border-color: #111827;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #edf2f7;
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+        }
+
+        .stat-card span {
+            display: block;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .stat-card strong {
+            font-size: 28px;
+            color: #0f172a;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin: 18px 0 12px;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 26px;
+            color: #0f172a;
+        }
+
+        .cta-link {
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .dashboard-section {
+            margin-bottom: 22px;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 760px;
+        }
+
+        th, td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1px solid #edf2f7;
+            font-size: 14px;
+        }
+
+        th {
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-size: 11px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+        }
+
+        .status-new { background: #e0f2fe; color: #075985; }
+        .status-reviewing { background: #fef3c7; color: #92400e; }
+        .status-quoted { background: #dbeafe; color: #1d4ed8; }
+        .status-accepted { background: #dcfce7; color: #166534; }
+        .status-declined { background: #fee2e2; color: #991b1b; }
+        .status-processing { background: #fef3c7; color: #92400e; }
+        .status-shipped { background: #dbeafe; color: #1d4ed8; }
+        .status-delivered { background: #dcfce7; color: #166534; }
+        .status-cancelled { background: #fee2e2; color: #991b1b; }
+        .status-pending { background: #f3f4f6; color: #374151; }
+        .status-under-review { background: #fef3c7; color: #92400e; }
+        .status-approved { background: #dcfce7; color: #166534; }
+        .status-rejected { background: #fee2e2; color: #991b1b; }
+        .status-completed { background: #dbeafe; color: #1d4ed8; }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .mini-card {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #edf2f7;
+            border-radius: 18px;
+            padding: 16px;
+        }
+
+        .mini-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            background: #f1f5f9;
+        }
+
+        .mini-card h4 {
+            margin: 0 0 6px;
+            font-size: 18px;
+        }
+
+        .mini-card p {
+            margin: 4px 0;
+            color: #475569;
+        }
+
+        .small-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .small-actions button,
+        .small-actions a {
+            border: 1px solid #dfe7f1;
+            border-radius: 10px;
+            padding: 8px 12px;
+            background: #fff;
+            color: #0f172a;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .message-item {
+            display: flex;
+            gap: 12px;
+            padding: 14px 4px;
+            border-bottom: 1px solid #edf2f7;
+            align-items: flex-start;
+        }
+
+        .message-item:last-child {
+            border-bottom: none;
+        }
+
+        .message-item .m-avatar {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .message-item.from-support .m-avatar { background: linear-gradient(135deg, #182d50, #2f5aa8); }
+        .message-item.from-you .m-avatar { background: linear-gradient(135deg, #64748b, #94a3b8); }
+
+        .message-item .m-body { flex: 1; min-width: 0; }
+        .message-item .m-body .m-head { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
+        .message-item .m-body strong { font-size: 13.5px; color: #0f172a; }
+        .message-item .m-verified {
+            font-size: 9.5px;
+            font-weight: 800;
+            color: #0f7b3f;
+            background: #e8f7ee;
+            border: 1px solid #bfe8cf;
+            padding: 1px 6px;
+            border-radius: 999px;
+        }
+        .message-item .m-body p { margin: 0 0 4px; font-size: 13.5px; color: #33445d; line-height: 1.5; }
+        .message-item .m-body small { color: #94a3b8; font-size: 11px; font-weight: 600; }
+
+        .messages-empty {
+            text-align: center;
+            padding: 36px 16px;
+            color: #64748b;
+        }
+
+        .messages-empty .m-empty-icon { font-size: 30px; margin-bottom: 10px; }
+        .messages-empty a {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 9px 20px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #182d50, #2f5aa8);
+            color: #fff;
+            font-weight: 700;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .empty-state {
+            padding: 18px 0;
+            color: #64748b;
+        }
+
+        .notifications-toolbar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 4px;
+        }
+
+        .db-health-banner {
+            padding: 14px 16px;
+            border-radius: 12px;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #7f1d1d;
+            font-size: 12.5px;
+            margin-bottom: 16px;
+        }
+
+        .db-health-banner strong { display: block; margin-bottom: 4px; }
+        .db-health-banner ul { margin: 4px 0; padding-left: 18px; line-height: 1.6; }
+
+        .notifications-toolbar button {
+            border: 1px solid #dfe7f1;
+            background: #fff;
+            color: #182d50;
+            font-weight: 700;
+            font-size: 12.5px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+        }
+
+        .notifications-toolbar button:hover {
+            background: #f3f6fb;
+        }
+
+        .notification-item {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 16px 14px;
+            margin-bottom: 10px;
+            border-radius: 14px;
+            background: #fff;
+            border: 1px solid #edf2f7;
+            border-left: 4px solid #cbd5e1;
+            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+            transition: box-shadow .15s ease, transform .15s ease;
+            position: relative;
+        }
+
+        .notification-item.is-unread {
+            border-left-color: #182d50;
+            background: #f8fafc;
+        }
+
+        .notification-item.is-unread::after {
+            content: "";
+            position: absolute;
+            top: 16px;
+            right: 14px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #2563eb;
+        }
+
+        .notification-item .n-icon {
+            flex-shrink: 0;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            background: #eef2f9;
+        }
+
+        .notification-item.n-order .n-icon { background: #e6f4ea; }
+        .notification-item.n-quote .n-icon { background: #fff4e5; }
+        .notification-item.n-chat .n-icon { background: #eaf1ff; }
+        .notification-item.n-payment .n-icon { background: #fdeeee; }
+        .notification-item.n-account .n-icon { background: #f1eefd; }
+
+        .notification-item.n-order { border-left-color: #16a34a; }
+        .notification-item.n-quote { border-left-color: #d97706; }
+        .notification-item.n-chat { border-left-color: #2563eb; }
+        .notification-item.n-payment { border-left-color: #dc2626; }
+        .notification-item.n-account { border-left-color: #7c3aed; }
+
+        .notification-item .n-body { flex: 1; min-width: 0; }
+        .notification-item .n-body strong { display: block; font-size: 14px; color: #0f172a; margin-bottom: 2px; }
+        .notification-item .n-body p { margin: 0 0 4px; font-size: 13.5px; color: #475569; line-height: 1.5; }
+        .notification-item .n-body small { color: #94a3b8; font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; }
+
+        .empty-state {
+            padding: 18px 0;
+            color: #64748b;
+        }
+
+        .order-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+        .order-tab { border: 1px solid #dfe7f1; background: #fff; color: #182d50; padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: 12.5px; cursor: pointer; }
+        .order-tab.active { background: #182d50; color: #fff; border-color: #182d50; }
+
+        .orders-list { display: flex; flex-direction: column; gap: 12px; }
+        .order-card { border: 1px solid #edf2f7; border-radius: 16px; padding: 16px 18px; background: #fff; box-shadow: 0 2px 10px rgba(15,23,42,0.03); }
+        .order-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+        .order-card-head strong { display: block; font-size: 14.5px; color: #0f172a; }
+        .order-card-head span { font-size: 12px; color: #94a3b8; }
+        .order-card-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 13px; color: #475569; }
+        .order-card-foot strong { font-size: 15px; color: #182d50; }
+        .order-card-date { display: block; margin-top: 6px; color: #94a3b8; font-size: 11px; }
+        .quote-admin-message { margin: 6px 0; padding: 10px 12px; background: #f9fbff; border: 1px solid #e7edf6; border-radius: 10px; font-size: 13px; color: #33445d; }
+
+        .order-timeline { display: flex; align-items: center; margin: 14px 2px; }
+        .order-timeline-step { flex: 1; text-align: center; position: relative; }
+        .order-timeline-step::before { content: ""; position: absolute; top: 6px; left: -50%; width: 100%; height: 2px; background: #e2e8f0; z-index: 0; }
+        .order-timeline-step:first-child::before { display: none; }
+        .order-timeline-step.done::before { background: #182d50; }
+        .order-timeline-step .dot { display: block; width: 14px; height: 14px; border-radius: 50%; background: #e2e8f0; margin: 0 auto 6px; position: relative; z-index: 1; }
+        .order-timeline-step.done .dot { background: #182d50; }
+        .order-timeline-step .label { font-size: 10px; color: #94a3b8; }
+        .order-timeline-step.done .label { color: #182d50; font-weight: 700; }
+        .order-timeline-cancelled { color: #b91c1c; font-size: 13px; margin: 10px 0; }
+
+        .profile-form,
+        .settings-form {
+            display: grid;
+            gap: 14px;
+        }
+
+        .profile-form input,
+        .profile-form textarea,
+        .settings-form input,
+        .settings-form select {
+            width: 100%;
+            border: 1px solid #dfe7f1;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font: inherit;
+            color: #0f172a;
+            background: #fff;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        @media (max-width: 960px) {
+            .dashboard-layout { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 640px) {
+            .dashboard-header { flex-direction: column; align-items: flex-start; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .two-col { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-container container">
+            <a href="../index.html" class="logo">NOVA <span>TECH</span></a>
+            <nav>
+                <a href="../index.html">HOME</a>
+                <a href="phones.html">PHONES</a>
+                <a href="../wholesale.html">WHOLESALE</a>
+                <a href="../index.html#contact">CONTACT</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="cart.html" class="nav-cart">🛒 <span id="cartCount">0</span></a>
+                <a href="account.html" class="account-button">MY ACCOUNT</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-shell">
+        <section class="dashboard-header">
+            <div>
+                <h1 id="dashboardTitle">Customer Dashboard</h1>
+                <p id="dashboardSubtitle">Welcome to your NovaTech account.</p>
+            </div>
+            <div class="dashboard-badge">Customer</div>
+        </section>
+
+        <section class="dashboard-layout">
+            <aside class="sidebar">
+                <div class="side-panel profile-card">
+                    <div class="profile-avatar" id="profileAvatar">N</div>
+                    <div class="profile-meta">
+                        <h3 id="profileName">Customer</h3>
+                        <p id="profileEmail">customer@novatech.com</p>
+                    </div>
+                    <div class="nav-links" id="dashboardNav">
+                        <button class="active" type="button" data-section="overview">Dashboard</button>
+                        <button type="button" data-section="orders">My Orders</button>
+                        <button type="button" data-section="quotes">Request Quotes</button>
+                        <button type="button" data-section="saved">Saved Phones</button>
+                        <button type="button" data-section="notifications">Notifications</button>
+                        <button type="button" data-section="messages">Messages</button>
+                        <button type="button" data-section="profile">Profile</button>
+                        <button type="button" data-section="settings">Settings</button>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="content-panel">
+                <div id="dashboardHealthBanner" class="db-health-banner" hidden></div>
+                <div id="overviewSection" class="dashboard-section">
+                    <div class="stats-grid">
+                        <div class="stat-card"><span>Orders</span><strong id="statOrders">0</strong></div>
+                        <div class="stat-card"><span>Quotes</span><strong id="statQuotes">0</strong></div>
+                        <div class="stat-card"><span>Saved Phones</span><strong id="statWishlist">0</strong></div>
+                        <div class="stat-card"><span>Unread</span><strong id="statUnread">0</strong></div>
+                    </div>
+                </div>
+
+                <div id="ordersSection" class="dashboard-section" style="display:none;">
+                    <div class="section-header">
+                        <h2>My Orders</h2>
+                        <a href="phones.html" class="cta-link">Shop now</a>
+                    </div>
+                    <div class="order-tabs">
+                        <button type="button" class="order-tab active" data-order-tab="all">All</button>
+                        <button type="button" class="order-tab" data-order-tab="active">Active</button>
+                        <button type="button" class="order-tab" data-order-tab="completed">Completed</button>
+                        <button type="button" class="order-tab" data-order-tab="cancelled">Cancelled</button>
+                    </div>
+                    <div id="ordersList" class="orders-list"></div>
+                </div>
+
+                <div id="quotesSection" class="dashboard-section" style="display:none;">
+                    <div class="section-header">
+                        <h2>Request Quotes</h2>
+                        <a href="request-quote.html" class="cta-link">Request new quote</a>
+                    </div>
+                    <div class="order-tabs">
+                        <button type="button" class="order-tab active" data-quote-cust-tab="all">All</button>
+                        <button type="button" class="order-tab" data-quote-cust-tab="retail">Retail</button>
+                        <button type="button" class="order-tab" data-quote-cust-tab="wholesale">Wholesale</button>
+                    </div>
+                    <div id="quotesList" class="orders-list"></div>
+                </div>
+
+                <div id="savedSection" class="dashboard-section" style="display:none;">
+                    <div class="section-header">
+                        <h2>Saved Phones</h2>
+                        <a href="phones.html" class="cta-link">Find more phones</a>
+                    </div>
+                    <div id="wishlistGrid" class="card-grid"></div>
+                </div>
+
+                <div id="notificationsSection" class="dashboard-section" style="display:none;">
+                    <div class="section-header">
+                        <h2>Notifications</h2>
+                    </div>
+                    <div class="notifications-toolbar"><button type="button" id="markAllNotificationsRead">Mark all as read</button></div>
+                    <div id="notificationsList"></div>
+                </div>
+
+                <div id="messagesSection" class="dashboard-section" style="display:none;"><div class="section-header"><h2>Messages</h2><a href="chat.html" class="cta-link">Open full chat</a></div><div id="accountMessagesList" class="messages-empty">Loading messages…</div></div>
+
+                <div id="profileSection" class="dashboard-section" style="display:none;">
+                    <div class="section-header">
+                        <h2>My Profile</h2>
+                    </div>
+                    <form class="profile-form" id="profileForm">
+                        <div class="two-col">
+                            <input type="text" name="full_name" id="profileFullName" placeholder="Full name">
+                            <input type="tel" name="phone" id="profilePhone" placeholder="Phone number">
+                        </div>
+                        <input type="email" name="email" id="profileEmailInput" placeholder="Email">
+                        <textarea name="profile_info" id="profileInfo" rows="4" placeholder="Profile information"></textarea>
+                        <button type="submit" class="action-btn">Save profile</button>
+                    </form>
+                </div>
+
+                <div id="settingsSection" class="dashboard-section" style="display:none;">
+                    <div class="section-header">
+                        <h2>Account Settings</h2>
+                    </div>
+                    <form class="settings-form" id="settingsForm">
+                        <input type="password" name="password" placeholder="New password">
+                        <select name="preferences">
+                            <option value="marketing">Marketing updates</option>
+                            <option value="order">Order updates only</option>
+                            <option value="quiet">Quiet mode</option>
+                        </select>
+                        <button type="submit" class="action-btn">Update settings</button>
+                        <button type="button" class="action-btn" id="logoutBtn">Sign out</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../script.js"></script>
+    <script src="../session-timeout.js"></script>
+    <script src="../account-chat.js"></script>
+    <script>
+        (async function () {
+            const authResult = window.novaSupabase ? await window.novaSupabase.auth.getUser() : { data: null };
+            if (!authResult.data?.user) {
+                window.location.href = "../login.html";
+                return;
+            }
+
+            const user = getCurrentUser() || {
+                id: authResult.data.user.id,
+                name: authResult.data.user.user_metadata?.full_name || authResult.data.user.email?.split("@")[0] || "Customer",
+                email: authResult.data.user.email || "",
+                phone: "",
+                role: "customer"
+            };
+
+            const state = { activeSection: "overview", data: null };
+
+            function formatCurrency(value) {
+                return `$${Number(value || 0).toLocaleString()}`;
+            }
+
+            function escapeHtml(value) {
+                return String(value || "").replace(/[&<>\"']/g, function (char) {
+                    return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char] || char;
+                });
+            }
+
+            function statusClass(value) {
+                return String(value || "pending").trim().toLowerCase().replace(/\s+/g, "-");
+            }
+
+            function timeAgo(dateStr) {
+                if (!dateStr) return "Just now";
+                const seconds = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
+                if (seconds < 60) return "Just now";
+                const minutes = Math.floor(seconds / 60);
+                if (minutes < 60) return `${minutes}m ago`;
+                const hours = Math.floor(minutes / 60);
+                if (hours < 24) return `${hours}h ago`;
+                const days = Math.floor(hours / 24);
+                if (days < 7) return `${days}d ago`;
+                return new Date(dateStr).toLocaleDateString();
+            }
+
+            function notificationMeta(type) {
+                const map = {
+                    order: { icon: "📦", cls: "n-order" },
+                    quote: { icon: "💬", cls: "n-quote" },
+                    payment: { icon: "💳", cls: "n-payment" },
+                    chat: { icon: "💭", cls: "n-chat" },
+                    contact: { icon: "✉️", cls: "n-contact" },
+                    account: { icon: "👤", cls: "n-account" }
+                };
+                return map[String(type || "account").toLowerCase()] || map.account;
+            }
+
+            function subscribeCustomerRealtime(customerId) {
+                const sb = window.novaSupabase;
+                if (!sb || !customerId) return;
+                if (window.__novaAccountChannel) sb.removeChannel(window.__novaAccountChannel);
+                window.__novaAccountChannel = sb.channel(`nova-account-${customerId}`)
+                    .on('postgres_changes',{event:'*',schema:'public',table:'notifications',filter:`customer_id=eq.${customerId}`},async()=>{ await refreshCustomerDashboard(); })
+                    .on('postgres_changes',{event:'*',schema:'public',table:'quotes',filter:`customer_id=eq.${customerId}`},async()=>{ await refreshCustomerDashboard(); })
+                    .on('postgres_changes',{event:'*',schema:'public',table:'orders',filter:`user_id=eq.${customerId}`},async()=>{ await refreshCustomerDashboard(); })
+                    .subscribe();
+            }
+            async function refreshCustomerDashboard(){
+                const data = await fetchCustomerDashboardData();
+                state.data = data;
+                subscribeCustomerRealtime(currentUser?.id);
+                // Reload the dashboard UI without a browser refresh.
+                const nav = document.querySelector('#dashboardNav button.active');
+                const selected = nav?.dataset.section || state.activeSection || 'overview';
+                state.activeSection = selected;
+                document.querySelectorAll('#dashboardNav button').forEach(function(item){ item.classList.toggle('active', item.dataset.section===selected); });
+                // Re-run the same renderer by rebuilding the page through a small event.
+                window.__novaAccountDataRefresh = data;
+                renderAccountData(data);
+            }
+
+            function renderAccountData(data) {
+                const currentUser = getCurrentUser();
+                const healthBanner = document.getElementById('dashboardHealthBanner');
+                if (healthBanner) {
+                    const errors = Array.isArray(data.errors) ? data.errors : [];
+                    if (errors.length) {
+                        healthBanner.hidden = false;
+                        healthBanner.innerHTML = `<strong>⚠ Some of your account data couldn't be loaded right now.</strong><ul>${errors.map(e => `<li>${escapeHtml(e.table)}: ${escapeHtml(e.message)}</li>`).join('')}</ul><span>Please refresh the page. If this keeps happening, contact NovaTech support via chat and mention this message.</span>`;
+                    } else {
+                        healthBanner.hidden = true;
+                        healthBanner.innerHTML = '';
+                    }
+                }
+
+                const orders = Array.isArray(data.orders) ? data.orders : [];
+                const quotes = Array.isArray(data.quotes) ? data.quotes : [];
+                state.orders = orders;
+                state.quotes = quotes;
+                document.getElementById('statOrders').textContent = orders.length;
+                document.getElementById('statQuotes').textContent = quotes.length;
+                renderOrdersList();
+                renderQuotesList();
+                const wishlist = Array.isArray(data.wishlist) ? data.wishlist : [];
+                const notifications = Array.isArray(data.notifications) ? data.notifications : [];
+
+                document.getElementById('statWishlist').textContent = wishlist.length;
+                document.getElementById('statUnread').textContent = notifications.filter(x => !x.read).length;
+
+                document.getElementById('wishlistGrid').innerHTML = wishlist.length ? wishlist.map(item => `
+                    <div class="mini-card">
+                        <img src="${escapeHtml(item.image || '../images/hero-phone.png')}" alt="${escapeHtml(item.product_name || 'Phone')}">
+                        <h4>${escapeHtml(item.product_name || 'Phone')}</h4>
+                        <p>${escapeHtml(item.brand || 'NovaTech')}</p>
+                        <p>${escapeHtml(item.storage || '')}</p>
+                        <p>${formatCurrency(item.price || 0)}</p>
+                        <p>${escapeHtml(item.availability || 'Available')}</p>
+                        <div class="small-actions">
+                            <a href="product.html?id=${encodeURIComponent(item.product_id || '')}">View Details</a>
+                            <button type="button" data-remove-wishlist="${escapeHtml(item.id || '')}">Remove</button>
+                        </div>
+                    </div>
+                `).join('') : '<div class="empty-state">No saved phones yet.</div>';
+
+                document.getElementById('notificationsList').innerHTML = notifications.length ? notifications.map(n => {
+                    const meta = notificationMeta(n.type);
+                    return `
+                        <div class="notification-item ${meta.cls} ${n.read ? '' : 'is-unread'}" data-notification-id="${escapeHtml(n.id || '')}">
+                            <div class="n-icon">${meta.icon}</div>
+                            <div class="n-body">
+                                <strong>${escapeHtml(n.title || 'Account update')}</strong>
+                                <p>${escapeHtml(n.message || '')}</p>
+                                <small>${escapeHtml(timeAgo(n.created_at))}</small>
+                            </div>
+                        </div>
+                    `;
+                }).join('') : '<div class="empty-state">You\'re all caught up — no notifications yet.</div>';
+            }
+
+            let orderTabFilter = "all";
+            let quoteCustTabFilter = "all";
+            const ORDER_TIMELINE_STEPS = ["pending", "processing", "in transit", "delivered"];
+
+            function renderOrderTimeline(status) {
+                const normalized = String(status || "pending").toLowerCase();
+                if (normalized === "cancelled") {
+                    return '<p class="order-timeline-cancelled">This order was cancelled.</p>';
+                }
+                const currentIndex = Math.max(0, ORDER_TIMELINE_STEPS.indexOf(normalized === "completed" ? "delivered" : normalized));
+                const labels = ["Order Placed", "Processing", "In Transit", "Delivered"];
+                return `<div class="order-timeline">${labels.map(function (label, i) {
+                    return `<div class="order-timeline-step ${i <= currentIndex ? "done" : ""}"><span class="dot"></span><span class="label">${label}</span></div>`;
+                }).join('')}</div>`;
+            }
+
+            function renderOrdersList() {
+                const container = document.getElementById('ordersList');
+                if (!container) return;
+                const orders = state.orders || [];
+                let list = orders;
+                if (orderTabFilter === "active") list = orders.filter(o => !["delivered", "completed", "cancelled"].includes(String(o.status || '').toLowerCase()));
+                if (orderTabFilter === "completed") list = orders.filter(o => ["delivered", "completed"].includes(String(o.status || '').toLowerCase()));
+                if (orderTabFilter === "cancelled") list = orders.filter(o => String(o.status || '').toLowerCase() === "cancelled");
+
+                container.innerHTML = list.length ? list.map(function (o) {
+                    const total = Number(o.total_amount || o.amount || 0);
+                    return `
+                        <div class="order-card">
+                            <div class="order-card-head">
+                                <div>
+                                    <strong>${escapeHtml(o.item_name || o.product_name || 'Phone')}</strong>
+                                    <span>${escapeHtml(o.order_number || ('#NT' + String(o.id).slice(0, 8).toUpperCase()))} · Qty ${Number(o.quantity || 1)}</span>
+                                </div>
+                                <span class="status-badge status-${statusClass(o.status || 'pending')}">${escapeHtml(o.status || 'Pending')}</span>
+                            </div>
+                            ${renderOrderTimeline(o.status)}
+                            <div class="order-card-foot">
+                                <span>Payment: ${escapeHtml((o.payment_status || 'pending').replace(/_/g, ' '))}</span>
+                                <strong>${formatCurrency(total)}</strong>
+                            </div>
+                            <small class="order-card-date">${escapeHtml(o.created_at ? new Date(o.created_at).toLocaleDateString() : 'Today')}</small>
+                        </div>
+                    `;
+                }).join('') : '<div class="empty-state">No orders in this category yet.</div>';
+            }
+
+            function renderQuotesList() {
+                const container = document.getElementById('quotesList');
+                if (!container) return;
+                const quotes = state.quotes || [];
+                let list = quotes;
+                if (quoteCustTabFilter !== "all") list = quotes.filter(q => (q.quote_type || 'retail') === quoteCustTabFilter);
+
+                container.innerHTML = list.length ? list.map(function (q) {
+                    const friendly = getCustomerFriendlyQuoteStatus(q.status);
+                    const total = q.total_amount == null ? null : Number(q.total_amount);
+                    const isWholesale = q.quote_type === 'wholesale';
+                    return `
+                        <div class="order-card">
+                            <div class="order-card-head">
+                                <div>
+                                    <strong>${escapeHtml(q.product_name || 'Phone')}</strong>
+                                    <span>${escapeHtml(q.quote_number || q.id)} · ${isWholesale ? 'Wholesale' : 'Retail'} · Qty ${Number(q.quantity || 1)}</span>
+                                </div>
+                                <span class="status-badge status-${statusClass(friendly)}">${quoteStatusIcon(friendly)} ${escapeHtml(friendly)}</span>
+                            </div>
+                            ${q.admin_message ? `<p class="quote-admin-message">${escapeHtml(q.admin_message)}</p>` : ''}
+                            <div class="order-card-foot">
+                                <span>${q.quoted_price ? 'Quoted price: ' + formatCurrency(q.quoted_price) : 'Awaiting pricing from NovaTech'}</span>
+                                ${total != null ? `<strong>${formatCurrency(total)}</strong>` : ''}
+                            </div>
+                            <small class="order-card-date">${escapeHtml(q.created_at ? new Date(q.created_at).toLocaleDateString() : 'Today')}${q.order_id ? ' · Order created ✓' : ''}</small>
+                        </div>
+                    `;
+                }).join('') : '<div class="empty-state">No quote requests in this category yet.</div>';
+            }
+
+            document.getElementById('ordersSection')?.addEventListener('click', function (event) {
+                const tab = event.target.closest('[data-order-tab]');
+                if (!tab) return;
+                orderTabFilter = tab.dataset.orderTab;
+                this.querySelectorAll('[data-order-tab]').forEach(b => b.classList.toggle('active', b === tab));
+                renderOrdersList();
+            });
+
+            document.getElementById('quotesSection')?.addEventListener('click', function (event) {
+                const tab = event.target.closest('[data-quote-cust-tab]');
+                if (!tab) return;
+                quoteCustTabFilter = tab.dataset.quoteCustTab;
+                this.querySelectorAll('[data-quote-cust-tab]').forEach(b => b.classList.toggle('active', b === tab));
+                renderQuotesList();
+            });
+
+            async function initializeDashboard() {
+                await ensureCustomerProfile();
+                const currentUser = getCurrentUser();
+                const profileAvatar = document.getElementById("profileAvatar");
+                const profileName = document.getElementById("profileName");
+                const profileEmail = document.getElementById("profileEmail");
+                const dashboardTitle = document.getElementById("dashboardTitle");
+                const dashboardSubtitle = document.getElementById("dashboardSubtitle");
+                const profileFullName = document.getElementById("profileFullName");
+                const profilePhone = document.getElementById("profilePhone");
+                const profileEmailInput = document.getElementById("profileEmailInput");
+                const profileInfo = document.getElementById("profileInfo");
+
+                const firstName = (currentUser?.name || "Customer").split(" ")[0];
+                dashboardTitle.textContent = `${firstName}'s Dashboard`;
+                dashboardSubtitle.textContent = `Welcome back, ${currentUser?.name || "Customer"}.`;
+                profileAvatar.textContent = (currentUser?.name || "C").charAt(0).toUpperCase();
+                profileName.textContent = currentUser?.name || "Customer";
+                profileEmail.textContent = currentUser?.email || "customer@novatech.com";
+                profileFullName.value = currentUser?.name || "";
+                profilePhone.value = currentUser?.phone || "";
+                profileEmailInput.value = currentUser?.email || "";
+                profileInfo.value = "";
+
+                const data = await fetchCustomerDashboardData();
+                state.data = data;
+                renderAccountData(data);
+
+                // Delegated listeners survive re-renders triggered by realtime updates.
+                document.getElementById("wishlistGrid").addEventListener("click", async function (event) {
+                    const button = event.target.closest("[data-remove-wishlist]");
+                    if (!button) return;
+                    const itemId = button.getAttribute("data-remove-wishlist");
+                    if (!itemId) return;
+
+                    const originalText = button.textContent;
+                    button.disabled = true;
+                    button.textContent = "Removing…";
+
+                    const success = await removeSavedPhone(itemId);
+                    if (success) {
+                        const card = button.closest(".wishlist-card, .saved-phone-card, [data-wishlist-card]");
+                        if (card) card.remove();
+                        await refreshCustomerDashboard();
+                        if (typeof showAccountNotice === "function") {
+                            showAccountNotice("Phone removed from your saved phones.", "success");
+                        }
+                    } else {
+                        button.disabled = false;
+                        button.textContent = originalText;
+                        if (typeof showAccountNotice === "function") {
+                            showAccountNotice("We could not remove this saved phone. Please try again.", "error");
+                        }
+                    }
+                });
+
+                document.getElementById("notificationsList").addEventListener("click", async function (event) {
+                    const item = event.target.closest(".notification-item.is-unread");
+                    if (!item) return;
+                    const id = item.getAttribute("data-notification-id");
+                    const supabase = window.novaSupabase;
+                    if (!supabase || !id) return;
+                    item.classList.remove("is-unread");
+                    await supabase.from("notifications").update({ read: true }).eq("id", id);
+                });
+
+                                document.getElementById("markAllNotificationsRead").addEventListener("click", async function () {
+                    const supabase = window.novaSupabase;
+                    const customerId = state.data?.profile?.id || currentUser?.id;
+                    if (!supabase || !customerId) {
+                        alert("Could not connect. Please refresh and try again.");
+                        return;
+                    }
+                    const { error } = await supabase.from("notifications").update({ read: true }).eq("customer_id", customerId).eq("read", false);
+                    if (error) {
+                        console.error("Mark all as read failed:", error);
+                        alert("Could not mark notifications as read: " + error.message);
+                        return;
+                    }
+                    await refreshCustomerDashboard();
+                });
+                document.getElementById("profileForm").addEventListener("submit", async function (event) {
+                    event.preventDefault();
+                    const supabase = window.novaSupabase;
+                    const formData = new FormData(event.currentTarget);
+                    if (!supabase) {
+                        alert("Supabase is not connected.");
+                        return;
+                    }
+
+                    const nextUser = {
+                        id: currentUser.id,
+                        name: (formData.get("full_name") || currentUser.name || "Customer").toString().trim(),
+                        email: (formData.get("email") || currentUser.email || "").toString().trim(),
+                        phone: (formData.get("phone") || currentUser.phone || "").toString().trim(),
+                        role: currentUser.role || "customer"
+                    };
+
+                    setCurrentUser(nextUser);
+                    await supabase.from("profiles").upsert({
+                        id: currentUser.id,
+                        auth_user_id: currentUser.id,
+                        full_name: nextUser.name,
+                        email: nextUser.email,
+                        phone: nextUser.phone,
+                        role: nextUser.role,
+                        updated_at: new Date().toISOString()
+                    }, { onConflict: "id" });
+                    alert("Profile updated successfully.");
+                    window.location.reload();
+                });
+
+                document.getElementById("settingsForm").addEventListener("submit", function (event) {
+                    event.preventDefault();
+                    alert("Account settings updated successfully.");
+                });
+
+                document.getElementById("logoutBtn").addEventListener("click", function () {
+                    localStorage.removeItem("novaTechUser");
+                    localStorage.removeItem("novaTechSupabaseSessionUser");
+                    if (window.novaSupabase) {
+                        window.novaSupabase.auth.signOut();
+                    }
+                    window.location.href = "../index.html";
+                });
+            }
+
+            document.getElementById("dashboardNav").addEventListener("click", function (event) {
+                const button = event.target.closest("button[data-section]");
+                if (!button) {
+                    return;
+                }
+
+                const selected = button.dataset.section;
+                state.activeSection = selected;
+                document.querySelectorAll("#dashboardNav button").forEach(function (item) {
+                    item.classList.toggle("active", item === button);
+                });
+
+                ["overview", "orders", "quotes", "saved", "notifications", "messages", "profile", "settings"].forEach(function (section) {
+                    const panel = document.getElementById(`${section}Section`);
+                    if (panel) {
+                        panel.style.display = selected === section ? "block" : "none";
+                    }
+                });
+            });
+function getCustomerFriendlyQuoteStatus(status) {
+    const map = { NEW: "Pending", REVIEWING: "Under Review", QUOTED: "Under Review", ACCEPTED: "Approved", DECLINED: "Rejected", EXPIRED: "Rejected", CLOSED: "Completed" };
+    return map[String(status || "NEW").toUpperCase()] || "Pending";
+}
+function quoteStatusIcon(friendlyStatus) {
+    const map = { "Pending": "⏳", "Under Review": "🔍", "Approved": "✅", "Rejected": "✕", "Completed": "✓" };
+    return map[friendlyStatus] || "⏳";
+}
+            initializeDashboard();
+        })();
+    </script>
+</body>
+</html>

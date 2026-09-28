@@ -1,0 +1,29 @@
+NOVATECH FINAL SUPABASE + MOBILE CATALOG BUILD
+
+Base:
+- This build preserves the supplied NovaTech website and existing chat system.
+- Chat files were intentionally NOT changed in this pass.
+
+Catalog:
+- Supabase public.products is now the production source of truth.
+- Old embedded phone cards were removed from index.html.
+- Old hardcoded phone filter names were removed from pages/phones.html.
+- Old demo/default phone data was removed from script.js.
+- Old localStorage product catalog is ignored when Supabase is configured.
+- If Supabase cannot be reached, the site shows an honest catalogue-unavailable/empty state instead of showing old phones.
+- Product images come from the Supabase product image field; a neutral hero placeholder is used only when a current product has no image.
+
+Mobile:
+- Unified mobile navigation across the different existing header variants.
+- No horizontal page overflow.
+- Product/phone cards use compact two-column mobile layouts.
+- Very narrow phones get tighter spacing without squeezing text.
+- Header buttons remain accessible through the mobile menu.
+
+Wholesale:
+- Existing protected request-quote links continue to use the site's login prompt.
+- Wholesale product count is read from the live Supabase catalogue instead of a hardcoded number.
+
+Database:
+- No database reset or schema changes are included.
+- No service-role key is used.

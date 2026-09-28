@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product | NovaTech</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container nav-container">
+        <a href="../index.html" class="logo">NovaTech</a>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="phones.html" class="active">Products</a></li>
+                <li><a href="../wholesale.html">Wholesale</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="nav-actions">
+            <a href="../login.html" class="account-button">Login</a>
+            <a href="cart.html" class="cart-button" aria-label="Shopping cart">
+                🛒 <span class="cart-count" id="cartCount">0</span>
+            </a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="product-page">
+        <div class="container">
+            <a href="phones.html" class="back-to-products">← Back to Products</a>
+
+            <div id="productLoadingState" class="product-loading-state">
+                <span></span><span></span><span></span>
+            </div>
+
+            <div class="product-detail-layout" id="productContent" style="display:none;">
+                <div class="product-detail-image">
+                    <img id="productImage" src="../images/hero-phone.png" alt="Phone image" style="width:100%;max-width:480px;border-radius:20px;display:block;">
+                </div>
+
+                <div class="product-detail-info">
+                    <div id="productBadges" style="margin-bottom:10px;"></div>
+                    <p class="product-brand" id="productBrand">&nbsp;</p>
+                    <h1 id="productName">&nbsp;</h1>
+                    <p class="product-storage" id="productStorage">&nbsp;</p>
+
+                    <div class="product-price-row" style="display:flex; gap:10px; align-items:baseline; margin:8px 0;">
+                        <span id="productPrice" style="font-size:24px; font-weight:700;"></span>
+                        <span id="productOldPrice" style="text-decoration:line-through; color:#999; display:none;"></span>
+                        <span id="productDiscountTag" class="discount-save-tag" style="display:none;"></span>
+                    </div>
+
+                    <div class="product-status">
+                        <span class="status-dot"></span>
+                        <span id="productAvailability">Available</span>
+                    </div>
+
+                    <div class="product-description">
+                        <h2>About this phone</h2>
+                        <p id="productDescription">Loading description...</p>
+                    </div>
+
+                    <div class="product-specs-block hidden">
+                        <h2>Specifications</h2>
+                        <div id="productSpecs" class="product-specs-grid"></div>
+                    </div>
+
+                    <div class="product-specifications-block hidden">
+                        <h3>Full Specifications</h3>
+                        <p id="productSpecifications" class="product-specifications-text"></p>
+                    </div>
+
+                    <div class="product-detail-actions">
+                        <button type="button" class="add-cart-button" id="addToCart">Add to Cart</button>
+                        <button type="button" class="primary-button" id="saveProduct">Save Phone</button>
+                        <button type="button" class="primary-button" id="requestQuote">Request a Quote</button>
+                    </div>
+
+                    <div class="product-shipping">
+                        <h3>Shipping</h3>
+                        <p id="productShippingInfo">Shipping options will be shown based on your location.</p>
+                    </div>
+
+                    <div class="product-support">
+                        <h3>Need help?</h3>
+                        <p>Contact NovaTech for product questions, availability or wholesale enquiries.</p>
+                        <a href="contact.html" class="text-link">Contact NovaTech →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <p>© 2026 NovaTech. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase.js"></script>
+<script src="../script.js"></script>
+</body>
+</html>

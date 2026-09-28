@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shop Phones | NovaTech</title>
+<link href="../style.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- ================= NAVIGATION ================= -->
+<header class="site-header">
+<div class="container nav-container">
+<a class="logo" href="../index.html">
+                NovaTech
+            </a>
+<nav>
+<ul>
+<li>
+<a href="../index.html">
+                            Home
+                        </a>
+</li>
+<li>
+<a class="active" href="phones.html">
+                            Products
+                        </a>
+</li>
+<li>
+<a href="../wholesale.html">
+                            Wholesale
+                        </a>
+</li>
+<li>
+<a href="contact.html">
+                            Contact
+                        </a>
+</li>
+</ul>
+</nav>
+<div class="nav-actions">
+<a class="account-button" href="../login.html">
+                    Login
+                </a>
+<a aria-label="Shopping cart" class="cart-button" href="cart.html">
+                    🛒
+                <span class="cart-count" id="cartCount">0</span>
+</a>
+</div>
+</div>
+</header>
+<!-- ================= SHOP HEADER ================= -->
+<main>
+<section class="phones-hero">
+<div class="container">
+<p class="eyebrow">
+                    NOVATECH COLLECTION
+                </p>
+<h1>
+                    Shop Phones
+                </h1>
+<p>
+                    Explore smartphones from leading brands.
+                    Find the device that fits your needs.
+                </p>
+</div>
+</section>
+<!-- ================= BRAND FILTER ================= -->
+<section class="phone-catalogue">
+<div class="container">
+<div class="catalogue-heading">
+<div>
+<p class="eyebrow">
+                            SHOP BY BRAND
+                        </p>
+<h2>
+                            Find Your Phone
+                        </h2>
+</div>
+<!-- SEARCH -->
+<div class="phone-search">
+<input aria-label="Search phones" id="phoneSearch" placeholder="Search phones..." type="search"/>
+</div>
+</div>
+<!-- BRAND BUTTONS -->
+<div class="phone-brand-filters">
+                    &lt;button class="phone-brand-button active" data-brand="all" type="button"&gt;All Phones&lt;/button&gt;
+                </div>
+<!-- ================= PRODUCT GRID ================= -->
+<div class="phones-grid" id="phonesGrid"></div>
+</div>
+
+
+<!-- NO RESULTS -->
+<div class="no-phone-results" id="noPhoneResults">
+<h3>
+                        No phones found
+                    </h3>
+<p>
+                        Try another brand or search term.
+                    </p>
+</div>
+
+</section>
+</main>
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+<div class="container">
+<p>
+                © 2026 NovaTech. All rights reserved.
+            </p>
+</div>
+</footer>
+<!-- ================= PHONE FILTER ================= -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase.js"></script>
+<script src="../script.js"></script>
+</body>
+</html>

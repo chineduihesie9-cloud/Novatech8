@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | NovaTech</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../cart.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container nav-container">
+        <a href="../index.html" class="logo">NOVA <span>TECH</span></a>
+        <nav class="main-nav">
+            <a href="../index.html">HOME</a>
+            <a href="phones.html">PHONES</a>
+            <a href="../wholesale.html">WHOLESALE</a>
+            <a href="contact.html">CONTACT</a>
+        </nav>
+        <a href="../login.html" class="account-button">LOGIN</a>
+    </div>
+</header>
+
+<main class="cart-page">
+    <div class="container">
+        <div class="cart-heading">
+            <p class="eyebrow">YOUR CART</p>
+            <h1>Shopping Cart</h1>
+            <p>Review the phones you have selected.</p>
+        </div>
+
+        <div id="cartItems" class="cart-items"></div>
+
+        <div id="emptyCart" class="empty-cart">
+            <h2>Your cart is empty</h2>
+            <p>Browse our phones and add a device to your cart.</p>
+            <a href="phones.html" class="primary-button">Browse Phones</a>
+        </div>
+
+        <div id="cartSummary" class="cart-summary">
+            <h2>Your Order</h2>
+            <p>Items: <strong id="cartTotalItems">0</strong></p>
+            <p>Total: <strong id="cartTotalValue">$0.00</strong></p>
+            <button type="button" id="requestQuoteFromCart" class="primary-button">Request a Quote</button>
+            <button type="button" id="clearCartButton" class="secondary-button">Clear Cart</button>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase.js"></script>
+<script src="../script.js"></script>
+</body>
+</html>

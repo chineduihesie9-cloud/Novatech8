@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NovaTech Admin</title>
+<link rel="stylesheet" href="../admin.css">
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<section id="adminLogin" class="admin-login-screen">
+  <div class="login-card">
+    <div class="brand-mark">N</div>
+    <p class="eyebrow">NOVATECH</p><h1>Admin Portal</h1>
+    <p class="muted">Sign in with your NovaTech admin account.</p>
+    <form id="adminLoginForm">
+      <label>Email<input id="adminEmail" type="email" autocomplete="username" required></label>
+      <label>Password<input id="adminPassword" type="password" autocomplete="current-password" required></label>
+      <button class="btn primary full" type="submit">Sign in to Dashboard</button>
+    </form>
+    <p id="loginError" class="error"></p>
+    <a class="back-link" href="../index.html">← Back to NovaTech</a>
+  </div>
+</section>
+
+<div id="dashboard" class="app hidden">
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-brand"><div class="brand-mark small">N</div><div><strong>NovaTech</strong><span>Admin Portal</span></div></div>
+    <nav id="nav">
+      <button class="nav-item active" data-view="overview">▦ <span>Overview</span></button>
+      <button class="nav-item" data-view="products">▣ <span>Products</span></button>
+      <button class="nav-item" data-view="invoices">◫ <span>Invoices</span></button>
+      <button class="nav-item" data-view="quotes">▤ <span>Request Quotes</span><b id="quoteBadge">0</b></button>
+      <button class="nav-item" data-view="customers">♙ <span>Customers</span></button>
+      <button class="nav-item" data-view="contacts">✉ <span>Contact Messages</span></button>
+      <button class="nav-item" data-view="messages">💬 <span>Customer Messages</span></button>
+    </nav>
+    <div class="sidebar-bottom"><a href="../index.html">↗ View Store</a><button id="logoutBtn">⇥ Log out</button></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><button id="menuBtn" class="icon-btn">☰</button><div><h2 id="pageTitle">Overview</h2><p id="adminIdentity">Checking admin account…</p></div><button id="refreshBtn" class="refresh">↻ Refresh</button></header>
+
+    <div id="dbHealthBanner" class="db-health-banner hidden"></div>
+
+    <section id="view-overview" class="view active-view">
+      <div class="welcome"><div><p class="eyebrow">CONTROL CENTER</p><h1>Good to see you.</h1><p>Everything important for NovaTech is in one place.</p></div><span id="liveState" class="live">● Live</span></div>
+      <div class="stats">
+        <article><span>Products</span><strong id="statProducts">0</strong><small id="statStock">0 units in stock</small></article>
+        <article><span>Customers</span><strong id="statCustomers">0</strong><small>registered accounts</small></article>
+        <article><span>Quote Requests</span><strong id="statQuotes">0</strong><small id="statPendingQuotes">0 waiting for review</small></article>
+        <article><span>Invoices</span><strong id="statOrders">0</strong><small id="statPendingOrders">0 pending</small></article>
+        <article><span>Revenue</span><strong id="statRevenue">$0</strong><small>from paid invoices</small></article>
+      </div>
+      <div class="grid-analytics">
+        <article class="panel panel-trend"><div class="panel-head"><div><h3>Overview</h3><p>Quotes &amp; invoices, last 14 days</p></div></div><div id="trendChart" class="trend-chart"></div></article>
+        <article class="panel panel-donut"><div class="panel-head"><div><h3>Invoice Status</h3><p>Share of all invoices</p></div></div><div id="donutChart" class="donut-wrap"></div></article>
+      </div>
+      <div class="grid-two">
+        <article class="panel"><div class="panel-head"><div><h3>Invoice status</h3><p>Where every invoice currently stands</p></div></div><div id="orderChart" class="bar-chart"></div></article>
+        <article class="panel"><div class="panel-head"><div><h3>Quote pipeline</h3><p>Current request status</p></div></div><div id="quoteChart" class="bar-chart"></div></article>
+      </div>
+      <div class="grid-two">
+        <article class="panel"><div class="panel-head"><div><h3>Recent quote requests</h3><p>Latest customer requests</p></div><button class="text-btn" data-go="quotes">View all</button></div><div id="recentQuotes"></div></article>
+        <article class="panel"><div class="panel-head"><div><h3>Recent invoices</h3><p>Latest orders created</p></div><button class="text-btn" data-go="invoices">View all</button></div><div id="recentOrders"></div></article>
+      </div>
+    </section>
+
+    <section id="view-products" class="view"><div class="section-head"><div><p class="eyebrow">CATALOGUE</p><h1>Products</h1><p>Add, edit, hide, or remove phones.</p></div><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><button id="newProductBtn" class="btn primary">+ Add Phone</button></div></div><div class="toolbar"><input id="productSearch" placeholder="Search brand, model or storage…"><select id="productFilter"><option value="all">All products</option><option value="stock">In stock</option><option value="low">Low stock</option><option value="out">Out of stock</option><option value="hidden">Hidden</option></select></div><div class="table-card"><div class="table-scroll"><table><thead><tr><th>Phone</th><th>Price</th><th>Stock</th><th>Status</th><th>Visibility</th><th>Actions</th></tr></thead><tbody id="productsBody"></tbody></table></div></div></section>
+
+    <section id="view-invoices" class="view"><div class="section-head"><div><p class="eyebrow">BILLING</p><h1>Invoices</h1><p>Every customer invoice, its status and payment.</p></div></div><div class="toolbar"><input id="orderSearch" placeholder="Search customer, email or product…"><select id="orderStatusFilter"><option value="all">All statuses</option><option>pending</option><option>processing</option><option>in transit</option><option>delivered</option><option>completed</option><option>cancelled</option></select></div><div class="invoice-stat-row"><div class="invoice-stat"><span>Pending</span><strong id="invStatPending">$0</strong></div><div class="invoice-stat"><span>Paid</span><strong id="invStatPaid">$0</strong></div><div class="invoice-stat"><span>Total invoiced</span><strong id="invStatTotal">$0</strong></div></div><div class="table-card"><div class="table-scroll"><table><thead><tr><th>Invoice</th><th>Customer</th><th>Product</th><th>Total</th><th>Status / Payment</th><th>Date</th></tr></thead><tbody id="ordersBody"></tbody></table></div></div></section>
+
+    <section id="view-quotes" class="view"><div class="section-head"><div><p class="eyebrow">WHOLESALE &amp; RETAIL</p><h1>Request Quotes</h1><p>Review requests, send pricing and update customers.</p></div></div><div class="quote-tabs"><button type="button" class="quote-tab active" data-quote-tab="all">All</button><button type="button" class="quote-tab" data-quote-tab="retail">Retail</button><button type="button" class="quote-tab" data-quote-tab="wholesale">Wholesale</button></div><div class="quote-layout"><div class="table-card"><div class="table-scroll"><table><thead><tr><th>Quote</th><th>Customer</th><th>Product</th><th>Qty</th><th>Type</th><th>Status</th><th>Date</th><th></th></tr></thead><tbody id="quotesBody"></tbody></table></div></div><aside id="quoteEditor" class="panel editor-panel"><div class="empty"><strong>Select a quote</strong><span>Its full details will appear here.</span></div></aside></div></section>
+
+    <section id="view-customers" class="view"><div class="section-head"><div><p class="eyebrow">ACCOUNTS</p><h1>Customers</h1><p>Manage registered profiles and account status.</p></div></div><div class="toolbar"><input id="customerSearch" placeholder="Search name or email…"></div><div class="table-card"><div class="table-scroll"><table><thead><tr><th>Customer</th><th>Email</th><th>Role</th><th>Status</th><th>Joined</th><th>Action</th></tr></thead><tbody id="customersBody"></tbody></table></div></div></section>
+
+    <section id="view-messages" class="view"><div class="section-head"><div><p class="eyebrow">CUSTOMER SUPPORT</p><h1>Customer Messages</h1><p>Choose a customer and reply in real time.</p></div></div><div class="admin-chat-layout"><aside class="admin-chat-sidebar"><input id="adminChatSearch" placeholder="Search customers…"><div id="adminChatList"></div></aside><section class="admin-chat-panel"><div class="admin-chat-header"><strong id="adminChatCustomer">Select a customer</strong><small id="adminChatEmail"></small></div><div id="adminChatMessages" class="admin-chat-messages"><div class="support-empty">Select a conversation.</div></div><div id="adminChatStatus" class="admin-chat-status"></div><div id="adminChatPreview" class="admin-chat-attachment-preview" hidden></div><form id="adminChatForm" class="admin-chat-compose"><button type="button" id="adminChatAttach" class="admin-attach-btn" title="Upload image or video">＋</button><input id="adminChatFile" type="file" accept="image/*,video/*" hidden><input id="adminChatInput" placeholder="Reply to customer…" autocomplete="off"><button id="adminChatSend" class="btn primary">Send</button></form></section></div></section>
+
+    <section id="view-contacts" class="view"><div class="section-head"><div><p class="eyebrow">INBOX</p><h1>Contact Messages</h1><p>Messages submitted through the contact page.</p></div></div><div class="table-card"><div class="table-scroll"><table><thead><tr><th>Name</th><th>Email</th><th>Subject</th><th>Message</th><th>Status</th><th>Date</th><th></th></tr></thead><tbody id="contactsBody"></tbody></table></div></div></section>
+  </main>
+</div>
+
+<div id="productModal" class="modal hidden"><div class="modal-card wide"><button class="modal-close" data-close="productModal">×</button><div class="modal-head"><p class="eyebrow">CATALOGUE</p><h2 id="productModalTitle">Add Phone</h2></div><form id="productForm"><input type="hidden" id="productId"><div class="form-grid">
+<label>Brand*<input id="brand" required></label><label>Model*<input id="model" required></label><label>Category<input id="category"></label><label>Storage<input id="storage" placeholder="256GB"></label><label>RAM<input id="ram" placeholder="8GB"></label><label>Colour<input id="colour"></label><label>Condition<select id="condition"><option>New</option><option>Refurbished</option><option>Used</option></select></label><label>Lock Status<select id="lockStatus"><option value="">Not specified</option><option>Factory Unlocked</option><option>Network Locked</option><option>iCloud/Activation Locked</option><option>Other</option></select></label><label>Network/Carrier<select id="network"><option value="">Not applicable</option><option>Unlocked (Any Network)</option><option>AT&amp;T</option><option>T-Mobile</option><option<option>Verizon</option><option>Cricket Wireless</option><option>Metro by T-Mobile</option><option>Boost Mobile</option><option>US Cellular</option><option>EE</option><option>O2</option><option>Vodafone</option><option>Three</option><option>giffgaff</option><option>4G</option><option>5G</option><option>Tesco Mobile</option><option> 5G / 4G LTE</option><option>Sky Mobile</option><option>Other</option></select></label><label>Region<input id="region" placeholder="e.g. Nigeria, UK, US"></label><label>Price ($)*<input id="price" type="number" min="0" step="0.01" required></label><label>Discount %<input id="discountPercent" type="number" min="0" max="100" step="1" value="0" placeholder="0"><small>Shown as a premium "-X% OFF" tag and used to calculate the customer price automatically.</small></label><label>Old Price ($)<input id="oldPrice" type="number" min="0" step="0.01"></label><label>Wholesale Price ($)<input id="wholesalePrice" type="number" min="0" step="0.01"></label><label>Stock<input id="stock" type="number" min="0" value="0"></label><label>Availability<select id="availability"><option>In Stock</option><option>Out of Stock</option><option>Pre-Order</option></select></label><label>Display Order<input id="displayOrder" type="number" value="0"></label><label>Shipping<input id="shipping" placeholder="Ships in 2–3 days"></label><label>Delivery<input id="delivery" placeholder="Nationwide delivery"></label></div><label>Description<textarea id="description" rows="3"></textarea></label><label>Specifications<textarea id="specifications" rows="3"></textarea></label><label>Image URL<input id="imageUrl" placeholder="https://…"></label><label>Upload Image<input id="imageFile" type="file" accept="image/*"><small>Upload uses the Supabase product-images bucket.</small></label><div id="imagePreviewWrap" class="preview-wrap hidden"><img id="imagePreview" alt="Product preview"></div><div class="checks"><label><input id="featured" type="checkbox"> Featured</label><label><input id="newArrival" type="checkbox"> New Arrival</label><label><input id="hiddenProduct" type="checkbox"> Hidden from store</label></div><div class="modal-actions"><button type="button" class="btn ghost" data-close="productModal">Cancel</button><button type="submit" class="btn primary" id="saveProductBtn">Save Product</button></div></form></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../js/supabase.js"></script><script src="../admin.js"></script><script src="../admin-chat.js"></script><script src="../session-timeout.js"></script>
+</body></html>

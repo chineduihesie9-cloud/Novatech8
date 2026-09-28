@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Request a Quote | NovaTech</title>
+
+<link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+
+<main class="quote-page">
+
+    <div class="quote-wrapper">
+
+
+        <!-- LEFT SIDE -->
+
+        <section class="quote-intro">
+
+            <div class="quote-badge" id="quoteBadge">
+                NOVATECH QUOTE
+            </div>
+
+            <h1 id="quoteTitle">
+                Request a Quote
+            </h1>
+
+            <p>
+                Tell us what phone you need, your quantity and destination. NovaTech will review your request and prepare the right pricing.
+            </p>
+
+
+            <div class="quote-features">
+
+                <div class="quote-feature">
+
+                    <span>✓</span>
+
+                    <div>
+                        <strong>
+                            Flexible quantities
+                        </strong>
+
+                        <p>
+                            Request pricing for the quantity
+                            you need.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="quote-feature">
+
+                    <span>✓</span>
+
+                    <div>
+                        <strong>
+                            Shipping options
+                        </strong>
+
+                        <p>
+                            Tell us where you need your order
+                            delivered.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="quote-feature">
+
+                    <span>✓</span>
+
+                    <div>
+                        <strong>
+                            Professional support
+                        </strong>
+
+                        <p>
+                            Our team can review your request
+                            and provide further details.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- RIGHT SIDE / FORM -->
+
+        <section class="quote-card">
+
+            <div class="quote-card-header">
+
+                <h2>
+                    Tell us what you need
+                </h2>
+
+                <p>
+                    Complete the form below.
+                </p>
+
+            </div>
+
+
+            <form id="quoteForm">
+
+
+                <!-- CUSTOMER INFORMATION -->
+
+                <div class="quote-section">
+
+                    <h3>
+                        Your Information
+                    </h3>
+
+
+                    <div class="quote-grid">
+
+                        <div class="quote-field">
+
+                            <label for="quoteName">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="quoteName"
+                                name="fullName"
+                                placeholder="Enter your full name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="quote-field">
+
+                            <label for="quoteEmail">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="quoteEmail"
+                                name="email"
+                                placeholder="Enter your email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quote-field">
+
+                        <label for="quotePhone">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="quotePhone"
+                            name="phone"
+                            placeholder="Enter your phone number"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PHONE REQUEST -->
+
+                <div class="quote-section">
+
+                    <h3>
+                        Phone Request
+                    </h3>
+
+
+                    <div class="quote-field">
+
+                        <label for="phoneModel">
+                            Phone Model
+                        </label>
+
+                        <input
+                            type="text"
+                            id="phoneModel"
+                            name="phoneModel"
+                            placeholder="e.g. iPhone 17 Pro Max"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="quote-grid">
+
+                        <div class="quote-field">
+
+                            <label for="quantity">
+                                Quantity
+                            </label>
+
+                            <input
+                                type="number"
+                                id="quantity"
+                                name="quantity"
+                                min="1"
+                                placeholder="e.g. 20"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="quote-field">
+
+                            <label for="condition">
+                                Preferred Condition
+                            </label>
+
+                            <select
+                                id="condition"
+                                name="condition"
+                                required
+                            >
+
+                                <option value="">
+                                    Select condition
+                                </option>
+
+                                <option value="new">
+                                    New
+                                </option>
+
+                                <option value="used">
+                                    Used
+                                </option>
+
+                                <option value="refurbished">
+                                    Refurbished
+                                </option>
+
+                                <option value="any">
+                                    Any
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="quote-field">
+
+                            <label for="lockStatusRequested">
+                                Preferred Lock Status
+                            </label>
+
+                            <select
+                                id="lockStatusRequested"
+                                name="lockStatusRequested"
+                            >
+
+                                <option value="">No preference</option>
+                                <option value="Factory Unlocked">Factory Unlocked</option>
+                                <option value="Network Locked">Network Locked</option>
+                                <option value="Carrier Locked">Carrier Locked</option> 
+                                <option value="SIM Locked">SIM Locked</option>
+                                <option value="Network Unlocked">Network Unlocked</option>
+                                <option value="Carrier Unlocked">Carrier Unlocked</option>
+                                <option value="Region Locked">Region Locked</option>
+                                <option value="eSim Unlocked">eSim Locked</option>
+                                <option value="Dual-Sim">Dual-Sim</option>
+                                <option value="Single-sim">Single-sim</option>
+                                <option value="Sim Unlocked">Sim Unlocked</option>
+                                <option value="Region Unlocked">Region Unlocked</option>
+                                <option value="Dual-Sim">Dual-Sim</option>
+                                <option value="Other">Other</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="quote-field">
+
+                            <label for="networkRequested">
+                                Preferred Network / Carrier
+                            </label>
+
+                            <select
+                                id="networkRequested"
+                                name="networkRequested"
+                            >
+
+                                <option value="">No preference</option>
+                                <option value="Unlocked (Any Network)">Unlocked (Any Network)</option>
+                                <option value="AT&T">AT&T</option>
+                                <option value="T-Mobile">T-Mobile</option>
+                                <option value="Verizon">Verizon</option>
+                                <option value="Cricket Wireless">Cricket Wireless</option>
+                                <option value="Metro by T-Mobile">Metro by T-Mobile</option>
+                                <option value="Boost Mobile">Boost Mobile</option>
+                                <option value="US Cellular">US Cellular</option>
+                                <option value="EE">EE</option>
+                                <option value="O2">O2</option>
+                                <option value="Vodafone">Vodafone</option>
+                                <option value="Three">Three</option>
+                                <option value="giffgaff">giffgaff</option>
+                                <option value="Tesco Mobile">Tesco Mobile</option>
+                                <option value="Sky Mobile">Sky Mobile</option>
+                                <option value="Proximux">Proximus</option>
+                                <option value="Orange">Orange</option>
+                                <option value="SFR">SFR</option>
+                                <option value="TIM">TIM</option>
+                                <option value="Telenet">Telenet</option>
+                                <option value="DIGI Belgium">DIGI Belgium</option>
+                                <option value="Free Mobile">Free Mobile</option>
+                                <option value="Wine Tre">Wind Tre</option>
+                                <option value="Coopvoce">Coopvoce</option>
+                                <option value="Lyca Mobile">Lyca Mobile</option>
+                                <option value="PosteMobile">PosteMobile</option>
+                                <option value="Other">Other</option>
+
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SHIPPING -->
+
+                <div class="quote-section">
+
+                    <h3>
+                        Shipping Information
+                    </h3>
+
+
+                    <div class="quote-grid">
+
+                        <div class="quote-field">
+
+                            <label for="country">
+                                Country
+                            </label>
+
+                            <input
+                                type="text"
+                                id="country"
+                                name="country"
+                                placeholder="Enter your country"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="quote-field">
+
+                            <label for="city">
+                                City
+                            </label>
+
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                placeholder="Enter your city"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quote-field">
+
+                        <label for="shippingMethod">
+                            Preferred Shipping Method
+                        </label>
+
+                        <select
+                            id="shippingMethod"
+                            name="shippingMethod"
+                            required
+                        >
+
+                            <option value="">
+                                Select shipping method
+                            </option>
+
+                            <option value="standard">
+                                Standard Shipping
+                            </option>
+
+                            <option value="express">
+                                Express Shipping
+                            </option>
+
+                            <option value="air">
+                                Air Freight
+                            </option>
+
+                            <option value="discuss">
+                                Discuss with NovaTech
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- WHOLESALE BUSINESS DETAILS -->
+                <div class="quote-section" id="wholesaleBusinessSection" hidden>
+                    <h3>Business Information</h3>
+                    <div class="quote-grid">
+                        <div class="quote-field"><label for="businessName">Business name</label><input id="businessName" placeholder="Your company or store name"></div>
+                        <div class="quote-field"><label for="businessType">Business type</label><select id="businessType"><option value="">Select business type</option><option>Retail shop</option><option>Online reseller</option><option>Distributor</option><option>Mobile dealer</option><option>Corporate buyer</option><option>Other</option></select></div>
+                        <div class="quote-field"><label for="monthlyVolume">Expected monthly volume</label><select id="monthlyVolume"><option value="">Select volume</option><option>10–49 units</option><option>50–199 units</option><option>200–499 units</option><option>500+ units</option></select></div>
+                    </div>
+                    <div class="wholesale-rules">
+                        <strong>Wholesale terms</strong>
+                        <ul><li>Wholesale pricing is based on model, quantity, destination and stock availability.</li><li>Minimum order quantity (MOQ) is normally <strong>10 units per wholesale request</strong>, unless NovaTech approves a smaller starter order.</li><li>Prices and shipping are confirmed in the final business quote before payment.</li><li>Availability can change until the order is confirmed.</li></ul>
+                        <label class="moq-check"><input type="checkbox" id="moqAcknowledged"> I understand the wholesale MOQ and pricing terms.</label>
+                    </div>
+                </div>
+
+                <!-- MESSAGE -->
+
+                <div class="quote-section">
+
+                    <h3>
+                        Additional Details
+                    </h3>
+
+
+                    <div class="quote-field">
+
+                        <label for="quoteMessage">
+                            Message
+                        </label>
+
+                        <textarea
+                            id="quoteMessage"
+                            name="message"
+                            rows="5"
+                            placeholder="Tell us anything else about your request..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="quote-submit"
+                >
+
+                    Request Quote
+
+                    <span>→</span>
+
+                </button>
+
+
+            </form>
+
+
+            <!-- SUCCESS MESSAGE -->
+
+            <div
+                class="quote-success"
+                id="quoteSuccess"
+            >
+
+                <div class="success-icon">
+                    ✓
+                </div>
+
+                <h2>
+                    Request Received
+                </h2>
+
+                <p>
+                    Thank you. Your quote request has been
+                    received. We'll review your information
+                    and get back to you.
+                </p>
+
+                <a href="../index.html">
+                    Back to NovaTech
+                </a>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase.js"></script>
+<script src="../script.js"></script>
+<script>
+(function(){
+  const params=new URLSearchParams(location.search);
+  const wholesale=params.get("type")==="wholesale";
+  const section=document.getElementById("wholesaleBusinessSection");
+  const badge=document.getElementById("quoteBadge");
+  const title=document.getElementById("quoteTitle");
+  const submit=document.querySelector(".quote-submit");
+  if(wholesale){
+    section.hidden=false;
+    badge.textContent="NOVATECH WHOLESALE";
+    title.textContent="Request a Wholesale Quote";
+    if(submit) submit.childNodes[0].textContent="Request Wholesale Quote ";
+    const intro=document.querySelector('.quote-intro > p:not(.quote-badge)');
+    if(intro) intro.textContent='For resellers, dealers, distributors and business buyers. Submit your quantity, destination and business details and NovaTech will prepare a tailored wholesale offer.';
+  }else{
+    badge.textContent="NOVATECH PHONE QUOTE";
+    title.textContent="Request a Phone Quote";
+    const intro=document.querySelector('.quote-intro > p:not(.quote-badge)');
+    if(intro) intro.textContent='Need a specific phone or quantity? Send us your requirements and NovaTech will prepare a phone quote based on stock, quantity and destination.';
+  }
+  const form=document.getElementById("quoteForm");
+  if(form){ form.dataset.quoteType=wholesale?"wholesale":"retail"; }
+  window.__novaQuoteMode=wholesale?"wholesale":"retail";
+})();
+</script>
+</body>
+
+</html>
